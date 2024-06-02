@@ -1,4 +1,5 @@
 package ar.edu.uba.fi;
 
-public class Servicio {
+public interface Servicio {
+    void verificarUsosMaximos(int maximoDeUsos, String idSocio, AgendaGimnasio agenda);
 }

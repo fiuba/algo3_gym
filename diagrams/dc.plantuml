@@ -1,0 +1,91 @@
+@startuml
+
+title "Clases utilizadas en los diagramas de secuencias\n"
+
+
+abstract class Plan {
+
+    + Plan()
+
+    + void verificarUsos(String idSocio, Servicio servicio, AgendaGimnasio agenda)
+
+    # Limite encontrar(Servicio servicio)
+    {abstract} # inicializarLimites();
+
+}
+
+class FanDeLasClases  {
+    # inicializarLimites();
+}
+
+class NoTanBasico  {
+    # inicializarLimites();
+}
+
+class Libre  {
+    # inicializarLimites();
+}
+
+class Basico  {
+    # inicializarLimites();
+}
+
+class Limite {
+    - maximo
+
+    + Limite(Servicio servicio)
+    + Limite(Servicio servicio, int maximo)
+    + boolean mismoServicio(Servicio servicio)
+    + void verificarUsosMaximos(String idSocio, AgendaGimnasio agenda)
+}
+
+interface Servicio {
+
+    void verificarUsosMaximos(int maximoDeUsos, String idSocio, AgendaGimnasio agenda)
+}
+
+class Cardio {
+    + void verificarUsosMaximos(int maximoDeUsos, String idSocio, AgendaGimnasio agenda)
+}
+
+class Musculacion {
+    + equals(Object) : Boolean
+}
+
+class ClaseGrupal {
+    + equals(Object) : Boolean
+}
+
+class AgendaGimnasio {
+
+    + Long cuantasClasesEstaSemana(String idSocio)
+    + Long cuantasVecesASalaMusculacion(String idSocio)
+    + void registrar(String idSocio, Servicio servicio)
+}
+
+class Socio {
+    - id
+
+    + Socio(String idSocio, Plan plan)
+
+    + reservar(Servicio servicio, AgendaGimnasio agenda)
+}
+
+Socio o-- "1" Plan
+
+Plan *- "*" Limite
+Plan <|-- Basico
+Plan <|-- Libre
+Plan <|-- NoTanBasico
+Plan <|-- FanDeLasClases
+
+Limite o- "1" Servicio
+
+Servicio <|.. Musculacion
+Servicio <|.. Cardio
+Servicio <|.. ClaseGrupal
+
+Servicio -> AgendaGimnasio: "<<use>>"
+
+
+@enduml

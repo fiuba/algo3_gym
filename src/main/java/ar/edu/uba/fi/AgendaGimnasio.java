@@ -4,18 +4,29 @@ import java.util.ArrayList;
 
 public class AgendaGimnasio {
 
-    private final ArrayList<Uso> reservasRegistradas;
+    private final ArrayList<Uso> reservas;
 
     public AgendaGimnasio() {
-        this.reservasRegistradas = new ArrayList<Uso>();
-    }
-    public void reservaYaRegistrada(Uso uso) {
-        this.reservasRegistradas.add(uso);
+
+        this.reservas = new ArrayList<Uso>();
     }
 
-    public long cuantasReservasPara(Socio socio, Servicio servicio, String semana) {
-        Uso intermedio = new Uso(socio, servicio, semana);
+    public Long cuantasClasesEstaSemana(String idSocio) {
+        Uso u = new Uso(idSocio, new ClaseGrupal());
+        return u.contarMisEquivalentes(this.reservas);    }
 
-        return intermedio.contarMisEquivalentes(this.reservasRegistradas);
+    public Long cuantasVecesASalaMusculacion(String idSocio) {
+        Uso u = new Uso(idSocio, new Musculacion());
+        return u.contarMisEquivalentes(this.reservas);
+    }
+
+    public void registrar(String idSocio, Servicio servicio) {
+
+        this.reservas.add(new Uso(idSocio, servicio));
+    }
+
+    public Long cuantasCardioEstaSemana(String idSocio) {
+        Uso u = new Uso(idSocio, new Cardio());
+        return u.contarMisEquivalentes(this.reservas);
     }
 }

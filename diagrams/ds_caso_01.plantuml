@@ -1,0 +1,28 @@
+@startuml
+
+title "Caso 01 - caso01NoTanBasicoPuedeReservarMusculacion\n"
+
+create AgendaGimnasio
+TestCase -> AgendaGimnasio: AgendaGimnasio()
+
+create NoTanBasico
+TestCase -> NoTanBasico: new
+NoTanBasico -> NoTanBasico: inicializarLimites()
+
+create "joaquin : Socio"
+TestCase -> "joaquin : Socio": new("Nro. 1", noTanBasico)
+
+create "m: Musculacion"
+TestCase -> "m: Musculacion": new
+TestCase -> "joaquin : Socio": reserva( m /* servicio */, agenda )
+"joaquin : Socio" -> NoTanBasico: verificarUsos( idSocio, servicio, agenda )
+NoTanBasico -> NoTanBasico: encontrar(servicio)
+return [Limite(4, Musculacion)]
+NoTanBasico -> Limite: verificarUsosMaximos(idSocio, agenda)
+Limite -> "m: Musculacion": verificarUsosMaximos(4 /* maximo */, idSocio, agenda)
+"m: Musculacion" -> AgendaGimnasio: cuantasClasesEstaSemana(idSocio)
+return
+
+"joaquin : Socio" -> AgendaGimnasio: registrar( idSocio, servicio )
+
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+
+title "Caso 02 - caso02FanDeLasClasesNoPuedeReservarMusculacion\n"
+
+create AgendaGimnasio
+TestCase -> AgendaGimnasio: AgendaGimnasio()
+
+create FanDeLasClases
+TestCase -> FanDeLasClases: new
+FanDeLasClases -> FanDeLasClases: inicializarLimites()
+
+create "santi : Socio"
+TestCase -> "santi : Socio": new("Nro. 16", noTanBasico)
+
+TestCase -> "santi : Socio": reserva( new Musculacion(), agenda)
+TestCase -> "santi : Socio": reserva( new Musculacion(), agenda)
+
+create "m: Musculacion"
+TestCase -> "m: Musculacion": new
+TestCase -> "santi : Socio": reserva( m /* servicio */, agenda )
+"santi : Socio" -> FanDeLasClases: verificarUsos( idSocio, servicio, agenda )
+FanDeLasClases -> FanDeLasClases: encontrar(servicio)
+return [Limite( 2, Musculacion)]
+FanDeLasClases -> Limite: verificarUsosMaximos(idSocio, agenda)
+Limite -> "m: Musculacion": verificarUsosMaximos(2 /* maximo */, idSocio, agenda)
+"m: Musculacion" -> AgendaGimnasio: cuantasClasesEstaSemana(idSocio)
+
+create MusculacionAgotada
+"m: Musculacion" -> MusculacionAgotada: throw
+
+@enduml

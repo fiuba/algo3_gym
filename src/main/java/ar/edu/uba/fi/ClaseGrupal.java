@@ -1,6 +1,7 @@
 package ar.edu.uba.fi;
 
-public class Musculacion implements Servicio {
+public class ClaseGrupal implements Servicio {
+
     @Override
     public boolean equals(Object obj) {
 
@@ -9,12 +10,10 @@ public class Musculacion implements Servicio {
 
     @Override
     public void verificarUsosMaximos(int maximoDeUsos, String idSocio, AgendaGimnasio agenda) {
-        Long usos = agenda.cuantasVecesASalaMusculacion(idSocio);
+        Long usos = agenda.cuantasClasesEstaSemana(idSocio);
 
-        if ( usos >= maximoDeUsos ) {
-            throw new MusculacionAgotada();
+        if ( usos > maximoDeUsos ) {
+            throw new ClasesGrupalesAgotadas();
         }
     }
-
-
 }
