@@ -20,8 +20,8 @@ NoTanBasico -> NoTanBasico: encontrar(servicio)
 return [Limite(4, Musculacion)]
 NoTanBasico -> Limite: verificarUsosMaximos(idSocio, agenda)
 Limite -> "m: Musculacion": verificarUsosMaximos(4 /* maximo */, idSocio, agenda)
-"m: Musculacion" -> AgendaGimnasio: cuantasClasesEstaSemana(idSocio)
-return
+"m: Musculacion" -> AgendaGimnasio: cuantasVecesASalaMusculacion(idSocio)
+return "0"
 
 "joaquin : Socio" -> AgendaGimnasio: registrar( idSocio, servicio )
 
